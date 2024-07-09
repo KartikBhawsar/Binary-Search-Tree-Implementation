@@ -1,0 +1,59 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+class Node{
+  public:
+  int data;
+  Node* left;
+  Node* right;
+  Node(int d){
+      this->data=d;
+      this->left=NULL;
+      this->right=NULL;
+  }
+};
+Node* insertintoBST(Node* &root,int d)
+{
+    //base case
+    if(root==NULL)
+    {
+        root=new Node(d);
+        return root;
+    }
+    if(d>root->data)
+    {
+        //right part me insert krna hai
+        root->right=insertintoBST(root->right,d);
+    }
+    else
+    {
+        root->left=insertintoBST(root->left,d);
+    }
+    return root;
+}
+void inorder(Node* &root)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+}
+void takeinput(Node* &root)
+{
+    int data;
+    cin>>data;
+    while(data!=-1)
+    {
+        insertintoBST(root,data);
+        cin>>data;
+    }
+}
+int main() {
+      Node* root=NULL;
+      cout<<"enter the data to create BST:"<<endl;
+      takeinput(root);
+      inorder(root);
+}
